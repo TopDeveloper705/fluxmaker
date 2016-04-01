@@ -1,0 +1,22 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "brace-style": ["error", "1tbs"],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "no-undef": "error",
+    "no-unused-vars": "off", /* see https://github.com/babel/babel-eslint/issues/21 */
+    "no-useless-concat": "error",
+    "object-curly-spacing": ["error", "always"],
+    "prefer-template": "error",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"]
+  },
+  "env": {
+    "node": true,
+    "mocha": true,
+    "es6": true,
+    "browser": true
+  },
+  "extends": "eslint:recommended"
+}

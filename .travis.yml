@@ -1,0 +1,26 @@
+language: node_js
+
+node_js:
+  - "5.3"
+
+cache:
+  directories:
+    - node_modules
+
+addons:
+  postgresql: "9.4"
+
+sudo: required
+
+services:
+  - postgresql
+
+env:
+  - NODE_ENV=test
+
+before_script: npm run compile
+
+script:
+  - npm run unit
+  - ./prepareIntegrationTest.sh && npm run integration
+

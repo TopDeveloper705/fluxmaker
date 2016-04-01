@@ -1,0 +1,10 @@
+module.exports = {
+  test: {
+    username: "postgres",
+    password: null,
+    database: "dummy_app_test",
+    host: "127.0.0.1",
+    dialect: "postgres",
+    logging: null
+  }
+};

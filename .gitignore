@@ -1,2 +1,12 @@
 node_modules/
 *.log
+/application
+/database
+/plugins
+/sequelize
+/server
+/tasks
+/testing
+/utils
+/webpack
+/index.js
