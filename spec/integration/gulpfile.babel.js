@@ -9,7 +9,7 @@ import cssWatch from './tasks/cssWatch';
 
 import createApplication from './app/app';
 
-const application = createApplication({
+const application = global.$app = createApplication({
   root: __dirname
 });
 

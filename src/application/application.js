@@ -8,12 +8,8 @@ import Server from '../server';
 import loadConfigs from './loadConfigs';
 
 class Application {
-  constructor({ env, root, setGlobal = '$app' }, { flux, server }) {
+  constructor({ env, root }, { flux, server }) {
     this._debug = debug('app');
-
-    if(setGlobal) {
-      global[setGlobal] = this;
-    }
 
     this.log = this.log.bind(this);
 

@@ -1,7 +1,7 @@
 import createApplication from '../app';
 
 export default (config) => {
-  const application = createApplication(config);
+  const application = global.$app = createApplication(config);
 
   application.initialize()
     .then(() => application.server.start())

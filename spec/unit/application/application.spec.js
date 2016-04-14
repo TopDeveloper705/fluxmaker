@@ -20,24 +20,15 @@ describe('Application', () => {
     before(() => {
       application = new Application({
         env: 'test',
-        root: __dirname,
-        setGlobal: 'testGlobal'
+        root: __dirname
       }, {
         flux: {},
         server: {}
       });
     });
 
-    after(() => {
-      global.testGlobal = undefined;
-    });
-
     it('should call #loadConfigs', () => {
       expect(Application.prototype.loadConfigs).to.have.been.calledOnce;
-    });
-
-    it('should set `testGlobal` global', () => {
-      expect(global.testGlobal).to.equal(application);
     });
 
     it('should have an array of plugins', () => {
@@ -49,8 +40,7 @@ describe('Application', () => {
     before(() => {
       application = new Application({
         env: 'test',
-        root: __dirname,
-        setGlobal: false
+        root: __dirname
       }, {
         flux: {},
         server: {}
