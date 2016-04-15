@@ -19,8 +19,6 @@ class Server {
   start() {
     const { port } = this.application.config;
 
-    this._server.use(this.middlewares);
-
     return new Promise((resolve, reject) => this._server.listen(port, resolve));
   }
 

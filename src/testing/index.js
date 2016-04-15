@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import request from 'supertest-as-promised';
 
 import factory from './factory';
 import loadFactories from './loadFactories';
@@ -16,6 +17,12 @@ class TestSuite {
       .catch((e) => {
         throw e;
       });
+  }
+
+  request() {
+    const { _server } = this.application.server;
+
+    return request(_server);
   }
 
   cleanDatabase() {

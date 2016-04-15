@@ -6,6 +6,7 @@ node_js:
 cache:
   directories:
     - node_modules
+    - spec/integration/node_modules
 
 addons:
   postgresql: "9.4"

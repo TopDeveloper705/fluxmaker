@@ -4,6 +4,7 @@ import Promise from 'bluebird';
 import debug from 'debug';
 
 import Server from '../server';
+import ServerPlugin from '../server/plugin';
 
 import loadConfigs from './loadConfigs';
 
@@ -25,6 +26,7 @@ class Application {
   }
 
   initialize() {
+    this.plugins.push(ServerPlugin);
 
     if(!this.chainedInitializers) {
       this.chainedInitializers = this.plugins
