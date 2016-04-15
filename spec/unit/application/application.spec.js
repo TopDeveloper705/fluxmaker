@@ -7,6 +7,11 @@ import Application from '../../../src/application/application';
 
 describe('Application', () => {
   let application;
+  let mockServer = {
+    _server: {
+      use: () => {}
+    }
+  };
 
   before(() => {
     stub(Application.prototype, 'loadConfigs');
@@ -23,7 +28,7 @@ describe('Application', () => {
         root: __dirname
       }, {
         flux: {},
-        server: {}
+        server: mockServer
       });
     });
 
@@ -43,11 +48,12 @@ describe('Application', () => {
         root: __dirname
       }, {
         flux: {},
-        server: {}
+        server: mockServer
       });
     });
 
     it('should return a promise', () => {
+      application.plugins = [];
       expect(application.initialize()).to.be.an.instanceof(Promise);
     });
   });
