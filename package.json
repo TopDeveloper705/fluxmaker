@@ -4,9 +4,9 @@
   "description": "Isomorphic React-Flux application framework.",
   "main": "index.js",
   "scripts": {
-    "unit": "mocha \"spec/unit/**/*.js\" --compilers js:babel-register --require babel-polyfill",
-    "integration": "cd spec/integration && npm test",
-    "test": "npm run unit && npm run integration",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "mocha \"test/unit/**/*.js\"",
+    "test:integration": "cd test/integration && npm test",
     "compile": "babel src --out-dir .",
     "watch": "babel src --watch --out-dir .",
     "lint": "gulp lint",

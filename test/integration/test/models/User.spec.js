@@ -10,7 +10,7 @@ describe('User', () => {
       .then((_user) => user = _user);
   });
 
-  after(() => $testSuite.cleanDatabase());
+  afterEach(() => $testSuite.cleanDatabase());
 
   it('should check user\'s email', () => {
     expect(user.email).to.contain('@');

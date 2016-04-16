@@ -1,7 +1,7 @@
 import interopRequire from 'interop-require';
 import Promise from 'bluebird';
 
-import eachFromFolder from '../../utils/eachFromFolder';
+import { fileName, eachFromFolder } from '../../utils';
 
 export default function FetchrInitializer(application) {
   const fetchr = application.flux.getPlugin('FetchrPlugin');
@@ -18,7 +18,7 @@ export default function FetchrInitializer(application) {
     try {
       eachFromFolder(servicesPath(), (file) => {
         const service = interopRequire(servicesPath(file));
-        services[file.split('.')[0]] = service;
+        services[fileName(file)] = service;
         fetchr.registerService(service);
       });
 

@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 import Sequelize from 'sequelize';
 
-import eachFromFolder from '../../utils/eachFromFolder';
+import { fileName, eachFromFolder } from '../../utils';
 import dialectMap from './dialectMap';
 
 export default function SequelizeInitializer(application) {
@@ -27,7 +27,7 @@ export default function SequelizeInitializer(application) {
   try {
     eachFromFolder(modelsPath(), (file) => {
       const model = sequelize.import(modelsPath(file));
-      models[file.split('.')[0]] = model;
+      models[fileName(file)] = model;
     });
 
     Object.keys(models).forEach((modelName) => {

@@ -12,7 +12,7 @@ const requirableFiles = (fileName) => {
   return isValidFormat && !isIndex && !isHidden;
 };
 
-export default (folderPath, iterator, filter = requirableFiles) => {
+export default function eachFromFolder(folderPath, iterator, filter = requirableFiles) {
   fs.readdirSync(folderPath)
     .filter(filter)
     .forEach(iterator);

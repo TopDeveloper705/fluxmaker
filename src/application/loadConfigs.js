@@ -1,6 +1,6 @@
 import interopRequire from 'interop-require';
 
-import eachFromFolder from '../utils/eachFromFolder';
+import { fileName, eachFromFolder } from '../utils';
 
 export default (application) => {
   const { env, pathTo } = application;
@@ -16,7 +16,7 @@ export default (application) => {
 
   eachFromFolder(paths.config, (configFile) => {
     const config = interopRequire(pathTo('config', configFile));
-    const configName = configFile.split('.')[0];
+    const configName = fileName(configFile);
 
     if(typeof config === 'object') {
       appConfig[configName] = config[env];

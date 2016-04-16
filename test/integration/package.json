@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "gulp dev",
     "start": "babel-node start.js",
-    "test": "mocha --compilers js:babel-register --recursive --require babel-polyfill",
+    "test": "mocha",
     "migrate": "sequelize db:migrate"
   },
   "dependencies": {
