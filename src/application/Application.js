@@ -3,8 +3,7 @@ import path from 'path';
 import Promise from 'bluebird';
 import debug from 'debug';
 
-import Server from '../server';
-import ServerPlugin from '../server/plugin';
+import { Server, ServerPlugin } from '../server';
 
 import loadConfigs from './loadConfigs';
 
