@@ -16,4 +16,4 @@ export default function eachFromFolder(folderPath, iterator, filter = requirable
   fs.readdirSync(folderPath)
     .filter(filter)
     .forEach(iterator);
-};
+}

@@ -10,6 +10,6 @@ export default {
       _server.use(middlewares);
 
       return Promise.resolve();
-    }
+    };
   }
 };

@@ -9,7 +9,7 @@
     "test:integration": "cd test/integration && npm test",
     "compile": "babel src --out-dir .",
     "watch": "babel src --watch --out-dir .",
-    "lint": "gulp lint",
+    "lint": "eslint \"src/**/*.js\" \"test/unit/**/*.js\"",
     "prepublish": "npm run compile"
   },
   "keywords": [
@@ -30,7 +30,6 @@
     "factory-girl": "^3.0.0",
     "factory-girl-sequelize": "^1.0.0",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
     "gulp-nodemon": "^2.0.6",
     "interop-require": "^1.0.0",
     "react-hot-loader": "^1.3.0",
