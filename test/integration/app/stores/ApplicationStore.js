@@ -1,6 +1,7 @@
 import BaseStore from 'fluxible/addons/BaseStore';
 
 import RouteStore from './RouteStore';
+import { Actions } from '../constants';
 
 class ApplicationStore extends BaseStore {
   constructor(dispatcher) {
@@ -35,7 +36,7 @@ class ApplicationStore extends BaseStore {
 ApplicationStore.storeName = 'ApplicationStore';
 
 ApplicationStore.handlers = {
-  'NAVIGATE_SUCCESS': 'handlePageTitle'
+  [Actions.NAVIGATE_SUCCESS]: 'handlePageTitle'
 };
 
 export default ApplicationStore;

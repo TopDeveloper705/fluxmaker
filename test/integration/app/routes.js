@@ -1,5 +1,6 @@
 import Home from './components/Home';
 import About from './components/About';
+import aboutAction from './actions/about';
 
 export default {
   home: {
@@ -14,6 +15,7 @@ export default {
     method: 'get',
     page: 'about',
     title: 'About',
-    handler: About
+    handler: About,
+    action: aboutAction
   }
 };

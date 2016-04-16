@@ -18,7 +18,8 @@ describe('Routing', () => {
         .get('/about')
         .expect(200)
         .then((res) => {
-          expect(res.text).to.contain('This is a description of the site');
+          expect(res.text).to.contain('This is a description of the site.');
+          expect(res.text).to.match(/It is .+ now\./);
         });
     });
   });
