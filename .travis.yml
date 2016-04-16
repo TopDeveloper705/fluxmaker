@@ -22,6 +22,6 @@ env:
 before_script: npm run compile
 
 script:
-  - npm run unit
-  - ./prepareIntegrationTest.sh && npm run integration
+  - npm run test:unit
+  - ./prepareIntegrationTest.sh && npm run test:integration
 
