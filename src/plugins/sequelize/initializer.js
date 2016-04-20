@@ -4,6 +4,7 @@ import { fileName, eachFromFolder } from '../../utils';
 
 import createSequelizeInstance from './createSequelizeInstance';
 import registerFactoryAdapter from './registerFactoryAdapter';
+import loadModels from './loadModels';
 
 export default function SequelizeInitializer(application) {
   const { database } = application.config;
@@ -13,22 +14,10 @@ export default function SequelizeInitializer(application) {
   }
 
   const sequelize = createSequelizeInstance(application);
-
-  const models = {};
-
-  const modelsPath = application.pathTo.bind(null, 'app', 'models');
+  let models;
 
   try {
-    eachFromFolder(modelsPath(), (file) => {
-      const model = sequelize.import(modelsPath(file));
-      models[fileName(file)] = model;
-    });
-
-    Object.keys(models).forEach((modelName) => {
-      if('associate' in models[modelName]) {
-        models[modelName].associate(models);
-      }
-    });
+    models = loadModels(application, sequelize);
   } catch(e) {
     return () => Promise.reject(e);
   }
