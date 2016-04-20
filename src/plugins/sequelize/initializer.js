@@ -1,8 +1,9 @@
 import Promise from 'bluebird';
-import Sequelize from 'sequelize';
 
 import { fileName, eachFromFolder } from '../../utils';
-import dialectMap from './dialectMap';
+
+import createSequelizeInstance from './createSequelizeInstance';
+import registerFactoryAdapter from './registerFactoryAdapter';
 
 export default function SequelizeInitializer(application) {
   const { database } = application.config;
@@ -11,14 +12,7 @@ export default function SequelizeInitializer(application) {
     return () => Promise.resolve();
   }
 
-  if(!database.dialectModulePath) {
-    database.dialectModulePath = application.pathTo('node_modules', dialectMap[database.dialect]);
-  }
-
-  const sequelize = new Sequelize(database.database,
-                                  database.username,
-                                  database.password,
-                                  database);
+  const sequelize = createSequelizeInstance(application);
 
   const models = {};
 
@@ -41,6 +35,8 @@ export default function SequelizeInitializer(application) {
 
   application.database = sequelize;
   application.models = models;
+
+  application.on('test:initialize', registerFactoryAdapter);
 
   return () => sequelize.sync();
 }

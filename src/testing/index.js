@@ -1,19 +1,21 @@
 import Promise from 'bluebird';
 import request from 'supertest-as-promised';
 
-import factory from './factory';
-import loadFactories from './loadFactories';
+import loadFactory from './loadFactory';
 
 import cleanDatabase from '../database/cleanDatabase';
 
-class TestSuite {
+class TestHelper {
   constructor({ application }) {
     this.application = application;
   }
 
   initialize() {
-    return this.application.initialize()
-      .then(() => Promise.resolve(this.loadFactories()))
+    const application = this.application;
+
+    return application.initialize()
+      .then(() => Promise.resolve(this.loadFactory()))
+      .then(() => application.emitAsync('test:initialize', { application, testHelper: this }))
       .catch((e) => {
         throw e;
       });
@@ -31,14 +33,13 @@ class TestSuite {
     });
   }
 
-  loadFactories() {
-    return loadFactories(this.application, factory);
+  loadFactory() {
+    this.factory = loadFactory(this.application);
   }
 }
 
 export {
-  factory,
-  TestSuite
+  TestHelper
 };
 
-export default TestSuite;
+export default TestHelper;

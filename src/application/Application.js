@@ -1,4 +1,5 @@
 import path from 'path';
+import EventEmitter from 'eventemitter2';
 
 import Promise from 'bluebird';
 import debug from 'debug';
@@ -7,12 +8,12 @@ import { Server, ServerPlugin } from '../server';
 
 import loadConfigs from './loadConfigs';
 
-class Application {
+class Application extends EventEmitter {
   constructor({ env, root }, { flux, server }) {
+    super();
+
     this._debug = debug('app');
-
     this.log = this.log.bind(this);
-
     this.env = env;
     this.flux = flux;
     this.pathTo = path.join.bind(path, root);
