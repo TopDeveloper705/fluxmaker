@@ -9,3 +9,5 @@ const application = global.$app = createApplication({ env: 'test', root });
 const testHelper = global.$testHelper = new TestHelper({ application });
 
 before(() => testHelper.initialize());
+
+afterEach(() => testHelper.factory.cleanup());

@@ -3,8 +3,6 @@ import request from 'supertest-as-promised';
 
 import loadFactory from './loadFactory';
 
-import cleanDatabase from '../database/cleanDatabase';
-
 class TestHelper {
   constructor({ application }) {
     this.application = application;
@@ -25,12 +23,6 @@ class TestHelper {
     const { _server } = this.application.server;
 
     return request(_server);
-  }
-
-  cleanDatabase() {
-    return cleanDatabase(this.application).catch((e) => {
-      throw e;
-    });
   }
 
   loadFactory() {
