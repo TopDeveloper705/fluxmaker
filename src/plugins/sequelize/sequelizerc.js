@@ -1,6 +1,6 @@
 import path from 'path';
 
-const sequelizerc = (root) => {
+function sequelizerc(root) {
   const pathTo = path.join.bind(null, root);
 
   return {
@@ -11,4 +11,4 @@ const sequelizerc = (root) => {
   };
 };
 
-export { sequelizerc };
+export default sequelizerc;
