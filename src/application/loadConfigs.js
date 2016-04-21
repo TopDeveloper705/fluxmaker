@@ -1,6 +1,8 @@
 import interopRequire from 'interop-require';
 
-import { fileName, eachFromFolder } from '../utils';
+import { fileName, eachFromFolder, loadConfig } from '../utils';
+
+import devServerConfig from './default/devServer';
 
 export default (application) => {
   const { env, pathTo } = application;
@@ -8,22 +10,29 @@ export default (application) => {
   const paths = {
     app: pathTo('app'),
     build: pathTo('build'),
-    config: pathTo('config'),
-    tasks: pathTo('tasks')
+    config: pathTo('config')
+  };
+
+  const defaultConfigs = {
+    devServer: loadConfig(devServerConfig, application)
   };
 
   const appConfig = interopRequire(pathTo('config', 'environments', env));
 
   eachFromFolder(paths.config, (configFile) => {
-    const config = interopRequire(pathTo('config', configFile));
+    const configObj = interopRequire(pathTo('config', configFile));
     const configName = fileName(configFile);
+    const config = loadConfig(configObj, application);
+    const defaultConfig = defaultConfigs[configName];
 
-    if(typeof config === 'object') {
-      appConfig[configName] = config[env];
-    } else {
-      appConfig[configName] = config(application);
-    }
+    appConfig[configName] = {
+      ...defaultConfig,
+      ...config
+    };
   });
 
-  return { paths, config: appConfig };
+  return { paths, config: {
+    ...defaultConfigs,
+    ...appConfig
+  }};
 };

@@ -8,14 +8,13 @@ export default ({ application }) => {
   const webpackConfig = interopRequire(webpackPath);
 
   return (callback) => {
+    const publicPath = {
+      publicPath: webpackConfig.output.publicPath
+    };
+
     new WebpackDevServer(webpack(webpackConfig), {
-      publicPath: webpackConfig.output.publicPath,
-      hot: true,
-      historyApiFallback: true,
-      quiet: true,
-      proxy: {
-        '*': { target: 'http://localhost:3001' }
-      }
+      ...publicPath,
+      ...application.config.devServer
     }).listen(application.config.port, callback);
   };
 };
