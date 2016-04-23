@@ -17,6 +17,7 @@ class Application extends EventEmitter {
     this.env = env;
     this.flux = flux;
     this.pathTo = path.join.bind(path, root);
+    this.root = root;
 
     this.loadConfigs();
 
