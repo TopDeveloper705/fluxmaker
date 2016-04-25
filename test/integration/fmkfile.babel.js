@@ -1,3 +1,4 @@
+import dotenv from 'dotenv/config';
 import gulp from 'gulp';
 import { CLI } from 'fluxmaker';
 
@@ -24,4 +25,4 @@ cli.task('css:watch', ['css:build'], cssWatch(cli));
 
 cli.task('dev', ['devServer', 'nodemon']);
 
-export default cli;
+cli.start();
