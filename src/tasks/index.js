@@ -15,10 +15,10 @@ export function executeTask(cli) {
 export function loadPipelines({ application, gulp }) {
   const { assets } = application.config;
 
-  const cssPaths = application.pathTo('app', 'styles', assets.css.entry);
+  const cssPath = application.pathTo('app', 'styles', assets.css.entry);
   const css = [() => gulp.src(cssPath)];
 
-  application.on('assets:post', (application, cli) => {
+  application.on('assets:post', ({ application, cli }) => {
     cli.pipeline('css', (files) => {
       const gulp = cli.gulp;
       const cssDest = application.pathTo('build', 'css');
@@ -27,11 +27,10 @@ export function loadPipelines({ application, gulp }) {
     });
   });
 
-  application.on('assets:close', (application, cli) => {
+  application.on('assets:close', ({ application, cli }) => {
     cli.task('css:build', () => {
-      cli._pipelines.css.reduce((pipe) => {
-
-      });
+      const begin = cli._pipelines.css.shift();
+      cli._pipelines.css.reduce((files, pipe) => pipe(files), begin());
     });
   });
 
