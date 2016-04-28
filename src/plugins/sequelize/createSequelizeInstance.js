@@ -17,4 +17,4 @@ export default (application) => {
                                   database);
 
   return sequelize;
-}
+};

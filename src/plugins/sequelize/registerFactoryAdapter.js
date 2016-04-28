@@ -6,4 +6,4 @@ export default ({ application, testHelper }) => {
   }
 
   testHelper.factory.setAdapter(factorySequelize());
-}
+};

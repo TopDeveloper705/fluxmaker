@@ -1,5 +1,5 @@
 import path from 'path';
-import EventEmitter from 'eventemitter2';
+import EventEmitter from 'events';
 
 import Promise from 'bluebird';
 import debug from 'debug';
@@ -19,19 +19,19 @@ class Application extends EventEmitter {
     this.pathTo = path.join.bind(path, root);
     this.root = root;
 
-    this.loadConfigs();
+    this._loadConfigs();
 
-    this.plugins = [];
+    this._plugins = [];
 
     this.server = server || new Server(this);
   }
 
   initialize() {
-    this.plugins.push(ServerPlugin);
+    this._plugins.push(ServerPlugin);
 
     if(!this.chainedInitializers) {
-      this.chainedInitializers = this.plugins
-        .map((plugin) => plugin.initializer)
+      this.chainedInitializers = this._plugins
+        .map((plugin) => plugin.initializer.bind(plugin))
         .reduce((chain, initializer) => {
           return chain.then(initializer(this));
         }, Promise.resolve());
@@ -41,22 +41,30 @@ class Application extends EventEmitter {
   }
 
   plug(plugin) {
-    this.plugins.push(plugin);
+    this._plugins.push(plugin);
   }
 
   exit() {
     process.abort();
   }
 
-  loadConfigs() {
+  log(...args) {
+    this._debug(...args);
+  }
+
+  emitAsync(type, payload) {
+    const listeners = this.listeners(type);
+
+    return listeners.reduce((chain, listener) => {
+      return chain.then(() => listener(payload));
+    }, Promise.resolve());
+  }
+
+  _loadConfigs() {
     const { config, paths } = loadConfigs(this);
 
     this.config = config;
     this.paths = paths;
-  }
-
-  log(...args) {
-    this._debug(...args);
   }
 }
 
