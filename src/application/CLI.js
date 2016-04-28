@@ -30,19 +30,19 @@ class CLI {
   prePipelines() {
     const application = this.application;
 
-    return this.application.emitAsync('assets:pre', { application, cli: this });
+    return application.emitAsync('assets:pre', { application, cli: this });
   }
 
   postPipelines() {
     const application = this.application;
 
-    return this.application.emitAsync('assets:post', { application, cli: this });
+    return application.emitAsync('assets:post', { application, cli: this });
   }
 
   closePipelines() {
     const application = this.application;
 
-    return this.application.emitAsync('assets:close', { application, cli: this });
+    return application.emitAsync('assets:close', { application, cli: this });
   }
 
   executeTask() {
