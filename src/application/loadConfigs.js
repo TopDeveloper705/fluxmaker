@@ -31,8 +31,11 @@ export default (application) => {
     };
   });
 
-  return { paths, config: {
-    ...defaultConfigs,
-    ...appConfig
-  }};
+  return {
+    paths,
+    config: {
+      ...defaultConfigs,
+      ...appConfig
+    }
+  };
 };

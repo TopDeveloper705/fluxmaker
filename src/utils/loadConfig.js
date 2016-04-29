@@ -4,4 +4,4 @@ export default (config, application) => {
   }
 
   return config(application);
-}
+};

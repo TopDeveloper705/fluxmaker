@@ -14,11 +14,11 @@ describe('Application', () => {
   };
 
   before(() => {
-    stub(Application.prototype, 'loadConfigs');
+    stub(Application.prototype, '_loadConfigs');
   });
 
   after(() => {
-    Application.prototype.loadConfigs.restore();
+    Application.prototype._loadConfigs.restore();
   });
 
   describe('#constructor', () => {
@@ -32,12 +32,12 @@ describe('Application', () => {
       });
     });
 
-    it('should call #loadConfigs', () => {
-      expect(Application.prototype.loadConfigs).to.have.been.calledOnce;
+    it('should call #_loadConfigs', () => {
+      expect(Application.prototype._loadConfigs).to.have.been.calledOnce;
     });
 
     it('should have an array of plugins', () => {
-      expect(application.plugins).to.be.an.instanceof(Array);
+      expect(application._plugins).to.be.an.instanceof(Array);
     });
   });
 
@@ -53,7 +53,7 @@ describe('Application', () => {
     });
 
     it('should return a promise', () => {
-      application.plugins = [];
+      application._plugins = [];
       expect(application.initialize()).to.be.an.instanceof(Promise);
     });
   });

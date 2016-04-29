@@ -17,4 +17,4 @@ export default (application, sequelize) => {
   });
 
   return models;
-}
+};

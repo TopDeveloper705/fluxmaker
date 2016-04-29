@@ -2,7 +2,7 @@ import initializer from './initializer';
 
 export default {
   name: 'SequelizePlugin',
-  initializer: initializer
+  initializer
 };
 
 export { default as sequelizerc } from './sequelizerc';

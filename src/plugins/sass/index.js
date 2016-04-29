@@ -1,6 +1,6 @@
 import initializer from './initializer';
 
 export default {
-  name: 'FetchrPlugin',
+  name: 'SASSPlugin',
   initializer
 };
